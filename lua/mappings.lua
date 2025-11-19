@@ -14,6 +14,7 @@ map("n", "<Leader>dj", "<cmd>lua require'dap'.step_over()<CR>", { desc = "Debugg
 map("n", "<Leader>dk", "<cmd>lua require'dap'.step_out()<CR>", { desc = "Debugger step out" })
 map("n", "<Leader>dc", "<cmd>lua require'dap'.continue()<CR>", { desc = "Debugger continue" })
 map("n", "<Leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", { desc = "Debugger toggle breakpoint" })
+map("n", "<Leader>du", "<cmd>lua require'dapui'.toggle()<CR>", { desc = "Toggle DAP UI" })
 map(
 	"n",
 	"<Leader>dd",
