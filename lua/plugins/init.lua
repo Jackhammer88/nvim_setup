@@ -19,7 +19,7 @@ return {
 
   {
     'mrcjkb/rustaceanvim',
-    version = '^6', -- Recommended
+    version = '^7',
     lazy = false,
     ft = "rust",
     config = function()
@@ -50,7 +50,7 @@ return {
 
   {
   "mfussenegger/nvim-dap",
-  lazy = false,  -- <<=== ВАЖНО: грузить всегда
+  lazy = false,
   config = function()
     require "configs.dap"   -- вынесем настройки в отдельный файл
   end,
@@ -133,7 +133,7 @@ return {
   {
     "sindrets/diffview.nvim",
     lazy = false,
-    dependencies = { 
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
     },
