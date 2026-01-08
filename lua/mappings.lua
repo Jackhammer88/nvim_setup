@@ -27,12 +27,22 @@ map("n", "<Leader>dr", "<cmd>lua require'dap'.run_last()<CR>", { desc = "Debugge
 -- rustaceanvim
 map("n", "<Leader>dt", "<cmd>lua vim.cmd('RustLsp testables')<CR>", { desc = "Debugger testables" })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "rust",
+  callback = function(ev)
+    vim.keymap.set(
+      { "n", "i" },
+      "<A-CR>",
+      "<cmd>RustLsp codeAction<CR>",
+      { buffer = ev.buf, desc = "Rust Code Action" }
+    )
+  end,
+})
+
 -- lsp
 map("n", "<Leader>cf", function()
   vim.lsp.buf.format({ async = true })
 end, { desc = "Cargo fmt (LSP)" })
-
-map({ "n", "v" }, "<M-CR>", vim.lsp.buf.code_action, { desc = "LSP code actions" })
 
 -- Показ дерева файлов
 map("n", "<F4>", ":NvimTreeToggle<CR>", default_opts)
