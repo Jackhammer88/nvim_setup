@@ -27,6 +27,13 @@ map("n", "<Leader>dr", "<cmd>lua require'dap'.run_last()<CR>", { desc = "Debugge
 -- rustaceanvim
 map("n", "<Leader>dt", "<cmd>lua vim.cmd('RustLsp testables')<CR>", { desc = "Debugger testables" })
 
+-- lsp
+map("n", "<Leader>cf", function()
+  vim.lsp.buf.format({ async = true })
+end, { desc = "Cargo fmt (LSP)" })
+
+map({ "n", "v" }, "<M-CR>", vim.lsp.buf.code_action, { desc = "LSP code actions" })
+
 -- Показ дерева файлов
 map("n", "<F4>", ":NvimTreeToggle<CR>", default_opts)
 -- <F5> разные вариации нумераций строк, можно переключаться на ходу
