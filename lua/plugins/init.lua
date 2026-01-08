@@ -70,16 +70,16 @@ return {
     'saecki/crates.nvim',
     ft = { "toml" },
     config = function()
-      require("crates").setup {
-        completion = {
-          cmp = {
-            enabled = true
-          },
+      require("crates").setup({
+        lsp = {
+          enabled = true,
+          actions = true,
+          completion = true,
+          hover = true,
         },
-      }
-      require('cmp').setup.buffer({
-        sources = { { name = "crates" } }
       })
+
+
     end
   },
 
@@ -133,7 +133,10 @@ return {
   {
     "sindrets/diffview.nvim",
     lazy = false,
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { 
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
     config = function()
       require("diffview").setup({})
     end,
