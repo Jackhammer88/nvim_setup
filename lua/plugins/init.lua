@@ -1,7 +1,7 @@
 return {
   -- Mason
-  { "mason-org/mason.nvim",           version = "^1.0.0" },
-  { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
+  { "mason-org/mason.nvim",           version = "^2" },
+  { "mason-org/mason-lspconfig.nvim", version = "^2" },
 
   {
     "stevearc/conform.nvim",
@@ -23,14 +23,20 @@ return {
     lazy = false,
     ft = "rust",
     config = function()
-      local mason_registry = require('mason-registry')
-      local codelldb = mason_registry.get_package("codelldb")
-      local extension_path = codelldb:get_install_path() .. "/extension/"
-      local codelldb_path = extension_path .. "adapter/codelldb"
-      --  local liblldb_path = extension_path.. "lldb/lib/liblldb.dylib"
-      -- If you are on Linux, replace the line above with the line below:
-      local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-      local cfg = require('rustaceanvim.config')
+        local cfg = require("rustaceanvim.config")
+      local path = require("mason-core.path")
+      local settings = require("mason.settings")
+
+      local mason_root = settings.current.install_root_dir
+      local extension = path.concat { mason_root, "packages", "codelldb", "extension" }
+
+      local codelldb_path = path.concat { extension, "adapter", "codelldb" }
+      local liblldb_path  = path.concat { extension, "lldb", "lib", "liblldb.so" }
+
+      if vim.fn.filereadable(codelldb_path) == 0 then
+        vim.notify("codelldb not found. Run :MasonInstall codelldb", vim.log.levels.WARN)
+        return
+      end
 
       vim.g.rustaceanvim = {
         dap = {
